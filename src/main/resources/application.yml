@@ -1,0 +1,51 @@
+#默认使用配置
+spring:
+  profiles:
+    active: dev
+  #jsp
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+#公共配置与profiles选择无关
+mybatis:
+  #对应实体类的包
+  typeAliasesPackage: com.cxc.demo.mapper
+  mapperLocations: classpath:mapper/*.xml
+
+
+---
+
+#开发配置
+spring:
+  profiles: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: <user>
+    password: <password>
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#  #jsp
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
+
+  aliyun:
+    endPoint: <>
+    bucket: <>
+    accessKeyID: <>
+    accessKeySecret: <>
+
+#微软云储存路径
+azure:
+  storegepath: <>
+  container: quickstarttest
+
+#云开关
+cloud:
+  switch: azure
