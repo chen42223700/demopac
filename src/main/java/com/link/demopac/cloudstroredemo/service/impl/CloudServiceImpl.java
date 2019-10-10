@@ -23,4 +23,10 @@ public class CloudServiceImpl implements CloudService {
         CloudStorageService cloudStorageService = cloudFactory.getCloud();
         cloudStorageService.uploadFile(UUID.randomUUID().toString(), file);
     };
+
+    @Override
+    public String queryFile(String key) throws Exception {
+        CloudStorageService cloudStorageService = cloudFactory.getCloud();
+        return cloudStorageService.generateDownloadURL(key);
+    }
 }

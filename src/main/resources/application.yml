@@ -2,11 +2,6 @@
 spring:
   profiles:
     active: dev
-  #jsp
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
 
 #公共配置与profiles选择无关
 mybatis:
@@ -29,12 +24,6 @@ spring:
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
 
-#  #jsp
-#  mvc:
-#    view:
-#      prefix: /WEB-INF/jsp/
-#      suffix: .jsp
-
   aliyun:
     endPoint: <>
     bucket: <>
@@ -48,4 +37,5 @@ azure:
 
 #云开关
 cloud:
-  switch: azure
+  #----阿里云:aliyun--------微软云:azure----------------
+  switch: aliyun

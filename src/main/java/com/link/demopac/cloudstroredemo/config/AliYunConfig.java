@@ -1,6 +1,9 @@
 package com.link.demopac.cloudstroredemo.config;
 
+import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.OSSClientBuilder;
+import com.link.demopac.Utils.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,9 +27,9 @@ public class AliYunConfig {
     private String cloud;
 
     @Bean
-    public OSSClient getCOSClient() {
-        OSSClient ossClient = new  OSSClient(endPoint, accessKeyID, accessKeySecret);
-        return ossClient;
+    public OSS getOSS() {
+        if (!Constants.ALIYUN.equals(cloud)) return null;
+        return new OSSClientBuilder().build(endPoint, accessKeyID, accessKeySecret);
     }
 
 }

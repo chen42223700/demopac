@@ -1,5 +1,6 @@
 package com.link.demopac.cloudstroredemo.config;
 
+import com.link.demopac.Utils.Constants;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.OperationContext;
 import com.microsoft.azure.storage.blob.BlobContainerPublicAccessType;
@@ -18,19 +19,21 @@ public class AzureConfig {
     @Value("${azure.container}")
     private String containerStr;
 
+    @Value("${cloud.switch}")
+    private String cloud;
+
     @Bean
-    public CloudBlobContainer getAzureContainer() {
-        CloudStorageAccount storageAccount = null;
+    public CloudBlobContainer getAzureContainer() throws Exception{
+        if (!Constants.AZURE.equals(cloud)) return null;
         try {
-            storageAccount = CloudStorageAccount.parse(azureStorageConnectionString);
+            CloudStorageAccount storageAccount = CloudStorageAccount.parse(azureStorageConnectionString);
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
             CloudBlobContainer container = blobClient.getContainerReference(containerStr);
             container.createIfNotExists(BlobContainerPublicAccessType.CONTAINER,  new BlobRequestOptions(), new OperationContext());
             return container;
         } catch (Exception e) {
-            System.out.println("-------------------------------");
             System.out.println(e.getMessage());
-            return null;
+            throw e;
         }
     }
 }

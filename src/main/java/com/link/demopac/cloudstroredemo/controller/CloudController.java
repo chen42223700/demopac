@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-
 @Controller
 public class CloudController {
 
@@ -20,14 +17,12 @@ public class CloudController {
 
     @GetMapping("/upload")
     public String uploadFile(){
-
         return "upload";
     }
 
     @PostMapping("/upload")
     @ResponseBody
-    public String uploadFile(
-            HttpServletRequest request, @RequestParam("file") MultipartFile file
+    public String uploadFile(@RequestParam("file") MultipartFile file
     ){
         String resp = "fail";
         try {
@@ -37,5 +32,17 @@ public class CloudController {
             e.printStackTrace();
         }
         return resp;
+    }
+
+    @GetMapping("/query")
+    @ResponseBody
+    public String queryFile(){
+        String url = "";
+        try {
+            url = cloudServiceImpl.queryFile("26e3f8fc-0706-4ed8-b046-aefcfdb3684a");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return url;
     }
 }

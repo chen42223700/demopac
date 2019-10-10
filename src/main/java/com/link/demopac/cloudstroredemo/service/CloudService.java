@@ -9,4 +9,12 @@ public interface CloudService {
      * @throws Exception
      */
     public void uploadFileToCloud(MultipartFile file) throws Exception;
+
+    /**
+     * 查询文件访问url
+     * @param key
+     * @return
+     * @throws Exception
+     */
+    public String queryFile(String key) throws Exception;
 }

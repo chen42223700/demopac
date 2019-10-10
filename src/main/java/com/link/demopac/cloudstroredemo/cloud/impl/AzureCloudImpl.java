@@ -15,7 +15,7 @@ import java.io.OutputStream;
 public class AzureCloudImpl implements CloudStorageService {
 	protected static Logger logger = LoggerFactory.getLogger(AzureCloudImpl.class);
 
-	@Autowired
+	@Autowired(required = false)
 	private CloudBlobContainer container;
 
 	@Override
